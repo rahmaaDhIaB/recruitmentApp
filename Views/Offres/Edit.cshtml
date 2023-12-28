@@ -1,0 +1,72 @@
+﻿@model App.Models.Offre
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <link rel="stylesheet" href="~/css/editOffre.css">
+
+</head>
+<body>
+
+
+<div class="ligne">
+    <div class="edit">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salaire" class="control-label"></label>
+                <input asp-for="Salaire" class="form-control" />
+                <span asp-validation-for="Salaire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Competance" class="control-label"></label>
+                <input asp-for="Competance" class="form-control" />
+                <span asp-validation-for="Competance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Responsabilite" class="control-label"></label>
+                <input asp-for="Responsabilite" class="form-control" />
+                <span asp-validation-for="Responsabilite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remuneration" class="control-label"></label>
+                <input asp-for="Remuneration" class="form-control" />
+                <span asp-validation-for="Remuneration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+</body>
+</html>

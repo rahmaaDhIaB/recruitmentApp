@@ -1,0 +1,51 @@
+﻿
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Change the background color as needed */
+    margin: 0;
+    padding: 0;
+}
+
+h4 {
+    color: #007bff; /* Change the heading color as needed */
+}
+
+dl.row dt {
+    font-size: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    color: #343a40; /* Change the text color as needed */
+}
+
+dl.row dd {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #495057; /* Change the text color as needed */
+}
+
+.btn-success, .btn-danger {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: #28a745; /* Change the button color as needed */
+    color: #ffffff; /* Change the text color as needed */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Change the button color as needed */
+    color: #ffffff; /* Change the text color as needed */
+    margin-left: 10px;
+}
+
+

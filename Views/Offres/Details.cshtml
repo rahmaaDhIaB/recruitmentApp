@@ -1,0 +1,210 @@
+﻿@model App.Models.Offre
+@using App.Models.Auth
+
+@{
+    Layout = null;
+    var currentUser = ViewBag.CurrentUser as User;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+@*     <link rel="stylesheet" href="~/css/details.css">
+ *@
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .image-container {
+            flex: 1;
+            overflow: hidden;
+        }
+
+            .image-container img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px 0 0 8px;
+            }
+
+        .content-container {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            max-height: 600px; /* Set max height for scrolling */
+        }
+
+        .row {
+            margin-bottom: 15px;
+        }
+
+        dt {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        dd {
+            margin: 0;
+        }
+
+        h4 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+            a:hover {
+                background-color: #0056b3;
+            }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button-box {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+ 
+
+</head>
+<body>
+
+<div>
+
+     @*    <div class="image-container">
+            <img src="/css/post.jpg" alt="Header Image">
+        </div> *@
+        <div class="container">
+        
+ 
+
+
+    <h4>the offer details </h4>
+
+         
+
+    <div class="row">
+
+
+
+
+            <dt >
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+        <dt >
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Salaire)
+        </dt>
+        <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Salaire) €
+        </dd>
+                
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Competance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Competance)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Responsabilite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Responsabilite)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Remuneration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Remuneration)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.name)
+        </dd>
+                  </div>
+        </div>
+        <div>
+
+
+                   <div>
+                 @*       @if (currentUser != null && currentUser.role == "Candidate")
+            {
+
+                <a asp-controller="=Condidatures" asp-action="create" asp-route-id="@Model?.Id">postuler</a>
+
+
+            } *@
+
+
+                <div class="button-container">
+                    <div class="button-box">
+
+            @if (currentUser != null && currentUser.role == "Candidate")
+            {
+                <a asp-controller="Candidatures" asp-action="Create"
+                   asp-route-userId="@currentUser.id" asp-route-offreId="@Model?.Id">postuler</a>
+            }
+
+
+
+            @if (currentUser != null && currentUser.role == "Recruiter")
+            {
+                <a asp-action="Edit" asp-route-id="@Model?.Id">edit</a>
+                <a asp-action="Index">delete</a>
+            }
+              </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

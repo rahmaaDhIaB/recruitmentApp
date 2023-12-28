@@ -1,0 +1,51 @@
+﻿@model List<App.Models.Offre>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your website description">
+    <meta name="keywords" content="keyword1, keyword2, keyword3">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/css/HomeC.css">
+
+
+</head>
+<body>
+
+    <!-- Your navigation and other HTML content here -->
+
+    <div class="container">
+        <h2>My Offers</h2>
+
+        <div class="row">
+            @foreach (var Offre in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@Offre.Title</h5>
+                            <p class="card-text">@Offre.Competance</p>
+                            <a href="#" class="btn btn-primary more-details-btn">More Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Your script and other HTML content here -->
+
+</body>
+</html>

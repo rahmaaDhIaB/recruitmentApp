@@ -1,0 +1,87 @@
+﻿@model App.Models.Auth.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link rel="stylesheet" href="~/css/auth.css">
+
+</head>
+<body>
+    <div class="registration">
+    REGISTER NOW !
+    </div>
+
+<div class="forum">
+        <form asp-action="register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="formgroup">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="formgroup">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="formgroup">
+                <label asp-for="password" class="control-label"></label>
+                    <input asp-for="password" type="password" class="form-control" required />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="formgroup">
+                <label asp-for="number" class="control-label"></label>
+                <input asp-for="number" class="form-control" />
+                <span asp-validation-for="number" class="text-danger"></span>
+            </div>
+            <div class="formgroup">
+                <label asp-for="address" class="control-label"></label>
+                <input asp-for="address" class="form-control" />
+                <span asp-validation-for="address" class="text-danger"></span>
+            </div>
+            <div class="formgroup">
+                <label asp-for="age" class="control-label"></label>
+                <input asp-for="age" class="form-control" />
+                <span asp-validation-for="age" class="text-danger"></span>
+            </div>
+            <div class="formgroup">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+         <!--   <div class="form-group">
+                <label asp-for="role" class="control-label"></label>
+                <input asp-for="role" class="form-control" />
+                <span asp-validation-for="role" class="text-danger"></span>
+            </div>
+            -->
+
+                <div class="formgroup">
+                    <label asp-for="role" class="control-label"></label>
+                    <select asp-for="role" class="form-control">
+                        <option value="Candidate">Candidate</option>
+                        <option value="Recruiter">Recruiter</option>
+                    </select>
+                    <span asp-validation-for="role" class="text-danger"></span>
+                </div>
+
+
+
+            <div class="formgroup">
+                <input type="submit" value="register" class="btn btn-primary" />
+            </div>
+        </form>
+    
+</div>
+
+<
+
+</body>
+</html>

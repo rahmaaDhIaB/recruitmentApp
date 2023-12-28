@@ -1,0 +1,30 @@
+﻿@model App.Models.Auth.User
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>My Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+
+    <dl>
+        <dt>Name:</dt>
+        <dd>@Model.name</dd>
+
+        <dt>Email:</dt>
+        <dd>@Model.email</dd>
+
+        <dt>Number:</dt>
+        <dd>@Model.number</dd>
+
+        <!-- Add other properties as needed -->
+        <!-- Example: -->
+        <dt>Address:</dt>
+        <dd>@Model.address</dd>
+
+        <!-- Continue adding properties as needed -->
+    </dl>
+</body>
+</html>

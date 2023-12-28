@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/css/style.css">
+
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form asp-action="Login">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <!-- <button type="submit">Login</button>-->
+         <!--   <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="login">login</a>-->
+            <div class="form-group">
+                <input type="submit" value="login" class="btn btn-primary" />
+            </div>
+        </form>
+        <p>
+            Don't have an account? <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="register">Create a new account</a>
+        </p>
+    </div>
+</body>
+</html>

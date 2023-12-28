@@ -1,0 +1,135 @@
+﻿@model List<App.Models.Offre>
+@using App.Models.Auth
+@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your website description">
+    <meta name="keywords" content="keyword1, keyword2, keyword3">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/css/HomeC.css">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RecrutementApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-items-center">
+                <!-- Search bar -->
+                <div class="mr-3">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-dark" type="submit">Search</button>
+                    </form>
+                </div>
+
+
+
+                <!-- Navigation items -->
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Candidatures" asp-action="MyCandidatures">My Candidatures</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="auth" asp-action="Logout"> logout </a>
+                    </li>
+                </ul>
+
+              
+           
+
+
+                <!-- Profile dropdown -->
+                <a asp-controller="Auth" asp-action="myprofile" asp-route-id="@ViewBag.CurrentUser?.id" class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    My Profile
+                </a>
+
+
+
+            </div>
+        </div>
+    </nav>
+    <div class="homePage">
+        <div class="page-header">
+            <img src="/css/pic.jpg" alt="Header Image">
+            <div class="line"></div>
+        </div>
+
+        <div class="latest-offers">Latest Job Offers</div>
+
+
+        <div>
+            @if (ViewBag.CurrentUser?.id != null)
+            {
+                <p>User ID: @ViewBag.CurrentUser.id</p>
+            }
+            else
+            {
+                <p>User ID not available</p>
+            }
+        </div>
+
+
+
+        <!-- Your HTML content -->
+        @if (ViewBag.UserName != null)
+        {
+            <p>User Name: @ViewBag.UserName</p>
+        }
+        else
+        {
+            <p>Userrrrrrrrrrrrrrrrrrrr ID not available</p>
+        }
+
+        @if (ViewBag.CurrentUser != null)
+        {
+            <p>User ID: @ViewBag.CurrentUser</p>
+        }
+
+        <!-- Continue with the rest of your HTML content -->
+        @foreach (var offre in Model)
+        {
+            <div class="job-card">
+                <h2><span class="job-title">@offre.Title</span></h2>
+                <p>@offre.Competance</p>
+                <div class="location">
+                    <p>@offre.Salaire</p><p>€</p>
+                </div>
+
+                <a class="nav-link text-dark" asp-area="" asp-controller="offres" asp-action="Details" asp-route-id="@offre.Id">
+                    <button class="details-button">More Details</button>
+                </a>
+            </div>
+        }
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

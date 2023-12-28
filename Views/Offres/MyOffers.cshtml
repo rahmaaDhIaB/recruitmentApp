@@ -1,0 +1,57 @@
+﻿@model List<App.Models.Offre>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>My Offers</title>
+    <link rel="stylesheet" href="~/css/MyOffers.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>My Offers</h2>
+
+        @if (Model.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Salaire</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var offre in Model)
+                    {
+                        <tr>
+                            <td>@offre.Title</td>
+                            <td>@offre.Salaire</td>
+                            <td>
+                                <button onclick="location.href='@Url.Action("Details", "Offres", new { id = offre.Id })'">See Detail</button>
+                                <button onclick="location.href='@Url.Action("Edit", "Offres", new { id = offre.Id })'">Edit</button>
+                                <button onclick="location.href='@Url.Action("Delete", "Offres", new { id = offre.Id })'">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No offers available.</p>
+        }
+
+      @*   <div>
+            <a asp-action="Index">Back to All Offers</a>
+        </div> *@
+    </div>
+
+</body>
+</html>
