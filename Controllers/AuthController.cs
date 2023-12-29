@@ -30,7 +30,31 @@ namespace App.Controllers
         }
 
         // GET: Auth/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int? offerId )
+        {
+            if (id == null || _context.Users == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+
+            ViewBag.OfferId = offerId;
+
+            return View(user);
+        }
+
+
+
+
+
+        public async Task<IActionResult> Detail(int? id )
         {
             if (id == null || _context.Users == null)
             {
@@ -46,6 +70,7 @@ namespace App.Controllers
 
             return View(user);
         }
+
 
 
         public async Task<IActionResult> myprofile(int? id)
@@ -122,7 +147,9 @@ namespace App.Controllers
             {
                 var user = JsonConvert.DeserializeObject<User>(userJson);
                 // Now 'user' contains information about the currently logged-in user
-
+               
+                ViewBag.UserName = user.name;
+                ViewBag.CurrentUser = user.id;
                 return View();
             }
 
@@ -141,9 +168,7 @@ namespace App.Controllers
                 // Now 'user' contains information about the currently logged-in user
 
                 // Pass user information to the view
-                ViewBag.UserName = user.name;
-
-                
+                ViewBag.UserName = user.name; 
                 ViewBag.CurrentUser = user.id;
 
 
@@ -197,15 +222,21 @@ namespace App.Controllers
         {
             if (id == null || _context.Users == null)
             {
-                return NotFound();
+                //return NotFound();
+                return BadRequest($"Invalid action: loula ");
             }
 
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
-                return NotFound();
+                //return NotFound();
+                return BadRequest($"Invalid action: thanya ");
+
+
             }
             return View(user);
+            //return BadRequest($"Invalid action: tletha ");
+
         }
 
         // POST: Auth/Edit/5

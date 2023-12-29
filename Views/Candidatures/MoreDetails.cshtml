@@ -1,0 +1,23 @@
+﻿@model App.Models.candidature
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MoreDetails</title>
+</head>
+<body>
+
+    <h2>Offer Details</h2>
+    <p>Offer Title: @ViewBag.OfferDetails.Title</p>
+
+    <h2>Candidature Details</h2>
+    <p>Statut: @Model.Statut</p>
+
+</body>
+</html>

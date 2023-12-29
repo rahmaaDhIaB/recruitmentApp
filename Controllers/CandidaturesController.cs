@@ -161,6 +161,18 @@ namespace App.Controllers
             }
 
             // Create a Candidature object with filled values
+
+            bool userHasCandidature = _context.Candidatures
+        .Any(c => c.UserId == user.id && c.OffreId == offreId.Value);
+
+
+            if (userHasCandidature)
+            {
+                // If the user already has a candidature, you may want to handle this case accordingly.
+                // For example, display a message or redirect to a different action.
+                return BadRequest($"Invalid action: deja postila  offre hedha  ");
+            }
+
             var candidature = new candidature
             {
                 UserId = user.id,
@@ -276,6 +288,11 @@ namespace App.Controllers
         //    return View(candidates);
         //}
 
+        public class ViewProfileViewModel
+        {
+            public List<User> Candidates { get; set; }
+            public int OfferId { get; set; }
+        }
 
         public IActionResult ViewProfile(int offerId)
         {
@@ -303,6 +320,18 @@ namespace App.Controllers
                 return NotFound(); // Candidates not found
             }
 
+
+
+            //var viewModel = new ViewProfileViewModel
+            //{
+            //    Candidates = candidates,
+            //    OfferId = offerId
+            //};
+
+            ViewBag.OfferId = offerId;
+
+            ViewBag.SuccessMessage = TempData["SuccessMessage"] as string;
+
             return View(candidates);
         }
 
@@ -316,62 +345,188 @@ namespace App.Controllers
 
 
 
-        [HttpGet]
-        public async Task<IActionResult> GestionCondidature(int candidatureId, string action)
-        {
-            var candidature = await _context.Candidatures
-                .Include(c => c.User)  // Load related User data
-                .FirstOrDefaultAsync(c => c.Id == candidatureId);
+        //[HttpGet]
+        //public async Task<IActionResult> GestionCondidature(int candidatureId, int offerId, string action)
+        //{
+        //    var candidature = await _context.Candidatures
+        //        .Include(c => c.User)  // Load related User data
+        //        .FirstOrDefaultAsync(c => c.Id == candidatureId);
 
+        //    if (candidature == null)
+        //    {
+        //        return NotFound();
+
+        //    }
+
+        //    // Check if the user ID matches the user ID in the candidature
+        //    if (candidature.UserId != candidature.User?.id)
+        //    {
+        //        return BadRequest("Invalid user ID");
+        //    }
+
+        //    // Update the status based on the specified action (case-insensitive)
+        //    // Update the status based on the specified action (case-insensitive)
+        //    if (string.Equals(action, "accept", StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        candidature.Statut = "accept";
+        //    }
+        //    else if (string.Equals(action, "refuse", StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        candidature.Statut = "refuse";
+        //    }
+        //    else
+        //    {
+        //        return BadRequest($"Invalid action: {action}");
+        //    }
+
+        //    // Save changes to the database
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction("Details", "User", new { id = candidature.UserId });
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        // Handle concurrency issues
+        //        return BadRequest("Failed to update candidature status");
+        //    }
+        //}
+
+
+
+
+
+
+
+
+        //////[HttpGet]
+        //////public IActionResult GestionCondidature(int candidatureId, int offerId, string action)
+        //////{
+        //////    // Check if candidatureId or offerId is invalid
+        //////    if (candidatureId <= 0 || offerId <= 0)
+        //////    {
+        //////        return BadRequest($"Invalid candidatureId ({candidatureId}) or offerId ({offerId}).");
+        //////    }
+
+        //////    // Additional logic based on the action parameter
+        //////    if (action == "GestionCondidature")
+        //////    {
+        //////        return Ok($"Accepted candidature with id {candidatureId} for offer {offerId}.");
+        //////    }
+        //////    else if (action == "Refuse")
+        //////    {
+        //////        return Ok($"Refused candidature with id {candidatureId} for offer {offerId}.");
+        //////    }
+        //////    else
+        //////    {
+        //////        // Invalid action parameter
+        //////        return BadRequest($"Invalid action parameter: {action}");
+        //////    }
+
+        //////    // Your remaining logic
+
+        //////    // Return a success result or redirect as needed
+        //////    // This part is unreachable because you have already returned from the method
+        //////    return Ok($"Valid candidatureId ({candidatureId}) or offerId ({offerId}).");
+        //////}
+
+        public IActionResult acceptCondidature(int userId, int offerId)
+        {
+            // Check if userId or offerId is invalid
+            if (userId <= 0 || offerId <= 0)
+            {
+                return BadRequest($"Invalid userId ({userId}) or offerId ({offerId}).");
+            }
+
+            // Find the candidature in the database by userId and offerId
+            var candidature = _context.Candidatures
+                .FirstOrDefault(c => c.UserId == userId && c.OffreId == offerId);
+
+            // Check if the candidature exists
             if (candidature == null)
             {
-                return NotFound();
-
+                return NotFound($"Candidature not found for userId {userId} and offerId {offerId}.");
             }
 
-            // Check if the user ID matches the user ID in the candidature
-            if (candidature.UserId != candidature.User?.id)
-            {
-                return BadRequest("Invalid user ID");
-            }
-
-            // Update the status based on the specified action (case-insensitive)
-            // Update the status based on the specified action (case-insensitive)
-            if (string.Equals(action, "accept", StringComparison.OrdinalIgnoreCase))
-            {
-                candidature.Statut = "accept";
-            }
-            else if (string.Equals(action, "refuse", StringComparison.OrdinalIgnoreCase))
-            {
-                candidature.Statut = "refuse";
-            }
-            else
-            {
-                return BadRequest($"Invalid action: {action}");
-            }
+            // Update the Statut to "accepter"
+            candidature.Statut = "accepter";
 
             // Save changes to the database
-            try
-            {
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "User", new { id = candidature.UserId });
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                // Handle concurrency issues
-                return BadRequest("Failed to update candidature status");
-            }
+            _context.SaveChanges();
+
+            // Return a success message
+            //return Ok($"Candidature for userId {userId} and offerId {offerId} has been accepted.");
+            TempData["SuccessMessage"] = "accepted successfully";
+
+            // Redirect to the ViewProfile action
+            return RedirectToAction("ViewProfile", new { offerId });
         }
 
 
+        public IActionResult refuseCondidature(int userId, int offerId)
+        {
+            // Check if userId or offerId is invalid
+            if (userId <= 0 || offerId <= 0)
+            {
+                return BadRequest($"Invalid userId ({userId}) or offerId ({offerId}).");
+            }
+
+            // Find the candidature in the database by userId and offerId
+            var candidature = _context.Candidatures
+                .FirstOrDefault(c => c.UserId == userId && c.OffreId == offerId);
+
+            // Check if the candidature exists
+            if (candidature == null)
+            {
+                return NotFound($"Candidature not found for userId {userId} and offerId {offerId}.");
+            }
+
+            // Update the Statut to "accepter"
+            candidature.Statut = "refuser";
+
+            // Save changes to the database
+            _context.SaveChanges();
+
+            // Return a success message
+            //return Ok($"Candidature for userId {userId} and offerId {offerId} has been accepted.");
+            TempData["SuccessMessage"] = "deleted successfully";
+
+            // Redirect to the ViewProfile action
+            return RedirectToAction("ViewProfile", new { offerId });
+        }
+
+        public IActionResult MoreDetails(int offerId)
+        {
+            // Ensure that the user is logged in
+            var currentUserJson = HttpContext.Session.GetString("CurrentUser");
+
+            if (string.IsNullOrEmpty(currentUserJson))
+            {
+                return RedirectToAction("Login", "Auth"); // Redirect to login if user not logged in
+            }
+
+            var user = JsonConvert.DeserializeObject<User>(currentUserJson);
+
+            // Retrieve the details for the specific offer and user
+            var candidatureDetails = _context.Candidatures
+                .Where(c => c.OffreId == offerId && c.UserId == user.id)
+                .FirstOrDefault();
+
+            if (candidatureDetails == null)
+            {
+                return NotFound(); // Candidature details not found
+            }
+
+            var offreDetails = _context.Offres
+         .Where(o => o.Id == offerId)
+         .FirstOrDefault();
 
 
+            ViewBag.OfferDetails = offreDetails;
 
 
-
-
-
-
+            return View(candidatureDetails);
+        }
 
 
 

@@ -170,9 +170,16 @@
           
         </div>
 
-        <div class="section profile">
-            <h2>My Profile</h2>
-         
+      
+
+
+        <div class="section offers">
+            <h2>
+                <a asp-controller="Auth" asp-action="myprofile" asp-route-id="@ViewBag.CurrentUser">
+                    My Profile
+                </a>
+            </h2>
+
         </div>
 
 

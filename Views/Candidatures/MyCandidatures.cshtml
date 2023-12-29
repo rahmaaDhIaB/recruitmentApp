@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <h5 class="card-title">@Offre.Title</h5>
                             <p class="card-text">@Offre.Competance</p>
-                            <a href="#" class="btn btn-primary more-details-btn">More Details</a>
+                            <a asp-controller="Candidatures" asp-action="MoreDetails" asp-route-offerId="@Offre.Id" class="btn btn-primary more-details-btn">More Details</a>
                         </div>
                     </div>
                 </div>

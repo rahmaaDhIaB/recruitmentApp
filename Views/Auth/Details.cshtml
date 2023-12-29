@@ -69,9 +69,14 @@
     </dl>
 </div>
     <div>
+
+        <div>
+            <p>Offre ID: @ViewData["OfferId"]</p>
+        </div>
         <!-- Other user details -->
-        <a asp-action="GestionCondidature" asp-controller="Candidatures" asp-route-candidatureId="@Model.id" asp-route-action="Accept" class="btn btn-success">Accept</a>
-        <a asp-action="GestionCondidature" asp-controller="Candidatures" asp-route-candidatureId="@Model.id" asp-route-action="Refuse" class="btn btn-danger">Refuse</a>
+        <a asp-action="acceptCondidature" asp-controller="Candidatures" asp-route-userId="@Model.id" asp-route-offerId="@ViewData["OfferId"]"  class="btn btn-success">Accept</a>
+        <a asp-action="refuseCondidature" asp-controller="Candidatures" asp-route-candidatureId="@Model.id" asp-route-offerId="@ViewData["OfferId"]" class="btn btn-danger">Refuse</a>
+    
     </div>
 
 </body>

@@ -2,6 +2,7 @@
 @using App.Models.Auth
 @{
     Layout = null;
+    var currentUser = ViewBag.CurrentUser as User;
 
 }
 
@@ -66,7 +67,7 @@
 
 
                 <!-- Profile dropdown -->
-                <a asp-controller="Auth" asp-action="myprofile" asp-route-id="@ViewBag.CurrentUser?.id" class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a asp-controller="Auth" asp-action="myprofile" asp-route-id="@ViewBag.CurrentUser" class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     My Profile
                 </a>
 
@@ -83,9 +84,9 @@
 
         <div class="latest-offers">Latest Job Offers</div>
 
-
+@* 
         <div>
-            @if (ViewBag.CurrentUser?.id != null)
+            @if (currentUser?.id != null)
             {
                 <p>User ID: @ViewBag.CurrentUser.id</p>
             }
@@ -110,7 +111,7 @@
         @if (ViewBag.CurrentUser != null)
         {
             <p>User ID: @ViewBag.CurrentUser</p>
-        }
+        } *@
 
         <!-- Continue with the rest of your HTML content -->
         @foreach (var offre in Model)

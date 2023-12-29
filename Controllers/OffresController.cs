@@ -24,6 +24,11 @@ namespace App.Controllers
         // GET: Offres
         public async Task<IActionResult> Index()
         {
+
+            var userJson = HttpContext.Session.GetString("CurrentUser");
+            var user = JsonConvert.DeserializeObject<User>(userJson);
+             ViewBag.UserName = user.name; 
+                ViewBag.CurrentUser = user.id;
             var appDbContext = _context.Offres.Include(o => o.User);
             return View(await appDbContext.ToListAsync());
         }
@@ -145,7 +150,7 @@ namespace App.Controllers
                         _context.Add(offre);
                         await _context.SaveChangesAsync();
 
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(MyOffers));
                     }
                 }
 

@@ -10,11 +10,77 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
+
+    <style>
+
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+
+
+
+        header {
+            background-color: #337ab7;
+            color: #fff;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 50px;
+            margin: 0;
+            background-color: #fff; /* Background behind the "Dashboard" title */
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .header button {
+            color: red;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+            .header button:hover {
+                background-color: grey;
+            }
+
+        .btn {
+            background-color: #337ab7;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+            .btn:hover {
+                background-color: #3369b4;
+            }
+    </style>
+
+
 </head>
 <body>
 
-<h4>Offre</h4>
-<hr />
+
+    <header>
+        <h1>Dashboard</h1>
+        <form asp-action="Logout">
+            <button class="btn" type="submit">Logout</button>
+        </form>
+    </header>
+
+    <h4>Offre</h4>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
